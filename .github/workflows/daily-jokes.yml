@@ -19,7 +19,6 @@ jobs:
         # Add your script/command to read a joke from the file and commit it
         # For example:
         current_line=$(cat current_line.txt)
-
         # Read the joke from the specified line
         joke=$(sed -n "${current_line}p" jokes.txt)
 

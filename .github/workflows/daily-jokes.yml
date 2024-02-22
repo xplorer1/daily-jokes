@@ -11,17 +11,10 @@ jobs:
   auto_commit:
     runs-on: ubuntu-latest
     steps:
-      - name: DEBUG 
-        run: echo "::debug::Ref = ${{github.ref}}"
       - uses: actions/checkout@v3      
         with:
          persist-credentials: false
          fetch-depth: 0
-
-      - name: Verify PAT_TOKEN
-        run: |
-          token_scope=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" https://api.github.com/user | jq -r '.scope')
-          echo "Token Scope: $token_scope"
 
       - name: Modify last update
         run: |
@@ -47,9 +40,4 @@ jobs:
           
           rand=$[$RANDOM % ${#arr[@]}]
           GIT_AUTHOR_DATE='2023-02-08T10:30:00' GIT_COMMITTER_DATE='2023-02-08T10:30:00' git commit -m 'new (old) files'
-          
-      - name: GitHub Push
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          directory: "."
-          github_token: ${{ secrets.PAT_TOKEN }}
+          git push

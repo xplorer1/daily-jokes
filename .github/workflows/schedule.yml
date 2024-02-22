@@ -2,7 +2,7 @@ name: Daily Joke Commit
 
 on:
   schedule:
-  - cron: "* * * * *" # Run every day at midnight
+    - cron: "* * * * *" # Run every day at midnight
 
 jobs:
   commit-joke:

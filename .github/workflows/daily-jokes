@@ -1,6 +1,9 @@
 name: Daily Joke Commit
 
 on:
+  push:
+    branches:
+      - master
   schedule:
     - cron: "* * * * *" # Run every day at midnight
 

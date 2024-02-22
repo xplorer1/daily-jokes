@@ -18,11 +18,19 @@ jobs:
       run: |
         # Add your script/command to read a joke from the file and commit it
         # For example:
+        current_line=$(cat current_line.txt)
+
+        # Read the joke from the specified line
+        joke=$(sed -n "${current_line}p" jokes.txt)
+
+        # Increment the line number for the next run
+        echo "$((current_line + 1))" > current_line.txt
+
         joke=$(head -n 1 jokes.txt)
         echo $joke >> README.md
         git config user.name "Chijioke Ugwuanyi"
         git config user.email "cj.ugwuanyi@gmail.com"
-        git add README.md
+        git add README.md current_line.txt
 
         current_date=$(date -d '2023-07-11' --iso-8601=seconds)
         next_date=$(date -d "$current_date + 1 day" --iso-8601=seconds)
